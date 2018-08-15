@@ -27,6 +27,121 @@ Google+相關參數為：clientId: `47543633988-ld42a9c88qr37pmmhktb2geeneleobja
 
 ReCaptcha相關參數為： data-sitekey: `6LegjyAUAAAAAPiileOTDOd6ePAqSXfBL2JtTbNa`
 
+## 名詞介紹
+
+WorldCam每個使用者都會有多個**專案**。而一個專案可以有很多**場景**，一個場景會有多組不同種類的**標記**。基本上，每上傳一張全景圖，等於多一個新的場景，而在場景內增加轉場連結連到另外一個場景則稱作**轉場標記**。
+
+# 流程呼叫情境介紹
+## 註冊帳號
+呼叫 ``[POST] api/{culture}/user`` 進行帳號註冊
+請見 Model ``JUserPost``資料結構
+```json
+{
+  "userAccount": "test_account@penpower.com.tw",
+  "password": "test1234",
+  "nickname": "test account",
+  "reCaptchaResponse": "03AHqfIOmdG-e8hGk_iNMvtvHva6JuoCwXh33VEH6xMEW61VjGVuw3LG4uub3QebW1lcctY_DYNgfQTx2gyJEEgDCO-MK4T7XZlkkCZSntQqxKFkr5nw5oFdXef2XXGKm1Hpq3Hr4V49WzEFk-GqS61K-Kq7Ej7FZey63L3WI6WzyKkF-o8Ul9C1_4_aD1aE6R7-sZ0OJcISqeBpc2ScfumORuaYt8RX4ddFYKI7xkgA5yMU-tLLVbZ3SyHsVaWegEYSJrErhVzMroZGQIHL013Mz2LsI4CClS6tX3TH-3Z1jIRRErRecTWXM0BSoFFn2OHzrPQBK_Vl9XQE0CkbzHEpHasugbCNg0Yw65IEW6WDZPsUVY3Yp6xpIj5IPiL8LXz4eCdt5EoxI5qOh6QpTZ7EF9kWWwGBHUNQ000aLOhOX2fD-4Oq5Ve5B6wIbr7QKmBvHkl5_fHIu0"
+}
+```
+其中，`reCaptchaResponse`是透過Google Recaptcha元件於使用者勾選我不是機器人之後，自動產生的token
+
+## 登入系統
+登入系統目前總共有三種方式，第一種是使用**帳號密碼登入**，第二種是使用**Facebook登入**，第三種是使用**Google+登入**，
+登入需使用``api/{culture}/jwt`` API進行登入，根據swagger文件我們知道此api還需要參數``JCredential``物件，此物件根據狀況不同會有以下幾種行為。
+* 登入
+  * 帳密登入
+  ```json
+  {
+    "grant_type": "password",
+    "username": "test@pp.com",
+    "password": "test123"
+  }
+  ```
+  * Google+或Facebook登入
+  ```json
+  {
+    "grant_type": "facebook",
+    "access_token": "1234567"
+  }
+  ```
+* 回傳值意義
+    當登入成功後，系統會回傳`JResponse<JAcessToken>`資料結構給Client，如以下範例。
+    ```json
+    {
+        "error_codes": 0,
+        "message": "",
+        "data": {
+            "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqaW5taW4ubGl1QGdtYWlsLmNvbSIsImlzcyI6IlBlbnBvd2VyVG9rZW5TZXJ2ZXIiLCJhdWQiOlsiaHR0cHM6Ly90ZXN0LndvcmxkY2FtMzYwLmNvbSIsImh0dHBzOi8vdGVzdC53b3JsZGNhbTM2MC5jb20iXSwianRpIjoiZmFiYjg0NGUtMWUxYy00MWNlLThkY2YtMDhmNzZhN2Y0MjVjIiwidXNlcm5hbWUiOiJqaW5taW4ubGl1QGdtYWlsLmNvbSIsIm5iZiI6MTUzNDI5ODUzMiwiZXhwIjoxNTM0MzAyMTMyfQ.uDUF53WN6DsBxgpHAHNzuDq4ZE5JeCCzK08z2bbB2Cs",
+            "expires_in": 3600,
+            "userId": "03018a99-018a-4572-4a5a-08d4f6a058e8",
+            "userProfile": {
+                "id": "03018a99-018a-4572-4a5a-08d4f6a058e8",
+                "userAccount": "jinmin.liu@gmail.com",
+                "nickname": "jinmin",
+                "lastLoginTime": "2018-08-15T02:02:12.7809616Z",
+                "lastLoginIP": "127.0.0.1",
+                "authType": 0,
+                "roleType": 1,
+                "acctStatus": 1,
+                "usedSize": 202068155,
+                "packageSize": 1073741824,
+                "createTime": "2017-09-08T09:59:51.250062",
+                "modifyTime": "2017-12-05T09:11:52.804027",
+                "activeStatus": 1,
+                "expiredTime": "2019-03-30T10:01:29.838212",
+                "productCode": "01640AFD",
+                "isPeriodActive": false,
+                "isUseVIPService": false
+            }
+        }
+    }
+    ```
+    error_codes回傳OK(0)代表登入成功，data欄位則是存放`JAcessToken`物件。
+Client端需要自行儲存接收到的`access_token`，`access_token`是未來再使用需要權限的
+API時，所需要放在Header的參數，使用方式為在Header加入Key:`Authorization` Value:`Bearer [access_token]`
+
+另外會收到expires_in的欄位，意思是此token在接收到之後，幾秒後會過期，這個範例寫的是3600秒(一小時)。除了access_token之外，您必須記錄登入成功收到
+JAcessToken的時間，以及expires_in。為了防止token過期，您可以自行撰寫迴圈來判斷是否要刷新token。比如說您可以在快到期五分鐘前才呼叫刷新Token API。
+* 刷新Token
+```json
+
+  {
+    "grant_type": "refresh_token",
+    "refresh_token": "123456780",
+  }
+```
+
+## 取得專案列表
+您可以呼叫 `[GET] api/{culture}/Project` API取得Project列表。或是呼叫api/{locale}/Project/{project_id}取得單一的完整Project。針對回應的JProject結構，重點是的描述畫面上欄位的對應方式。
+
+* 預覽縮圖：請存取``proj.defaultPano.PreviewImage``的縮圖屬性取得完整縮圖URL。
+* 專案狀態：請存取``proj.Status``，若為0(Closed)則關閉、1(Open)則開啟。
+* 專案名稱：請存取``proj.Name``
+* 專案大小：請存取``proj.ProjectSize``，請欄位單位為byte。
+* 建立日期：請存取``proj.CreateTime``，使用UTC+0，需自行轉成Client所在時區的時間。
+* 檢視專案：請使用WebView存取以下網址。``{api_server_base_url}/editor/PanoViewer.html?project_id={project_id}&jwt_token={access_token}&jwt_expires_in={expires_in}``
+* 產生分享連結：請使用``[POST] api/{culture}/Share``產生該專案的分享連結。
+
+## 建立專案
+呼叫``[POST] api/{culture}/Project`` 建立空的新專案。
+
+## 建立場景
+建立場景則需要以下一連串的動作
+1. 首先根據全景圖建立一張縮圖。
+2. 使用``[POST] api/{culture}/Image``上傳縮圖，得到previewImageId。
+3. 使用``[POST] api/{culture}/Image``上傳全景圖原檔，得到panoImageId。
+4. 呼叫``[POST] api/{culture}/Project/{project_id}/pano``新增場景，回傳新的Project結果。
+
+## 使用者Profile
+點選一般資訊時，需使用 ``[GET] api/{culture}/User/{user_id} 重新抓取自己的資訊(JUser)。填入以下對應欄位：
+1. 用戶名稱：user.NickName
+2. 用戶角色：user.RoleType
+3. 啟用序號：user.ProductCode
+4. 已使用空間：user.UsedSize
+5. 總空間：user.PackageSize
+6. 到期日：user.ExpiredTime (須從UTC+0轉成Client端時區)
+7. 訂閱狀態：user.IsPeriodActive
+
 ## 回應物件基本結構
 基本上，所有api的回應都會使用`JResponse`物件包住，`JResponse`物件包含兩個欄位，`error_codes`代表執行的結果，通常如果API執行正確，都會RETURN OK(0)，若發生驗證資料錯誤(如新增帳號時傳入的帳號格式不合法)，Server則會根據您傳入的語系`{locale}`將錯誤的訊息內容回傳到`message`欄位給client，通常只要alert告知使用者錯誤的內容為何即可。
 
