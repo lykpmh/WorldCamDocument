@@ -20,7 +20,7 @@ Authorization : Bearer [jwt_token]
 ## Google+登入
 與facebook相同，client端一樣需取得access_token。
 
-Google+相關參數為：clientId: `47543633988-ld42a9c88qr37pmmhktb2geeneleobja.apps.googleusercontent.com`
+Google+相關參數為：clientId: `946399151159-2bfguo8hba3j8bt52iu8k06rlcrdf3d9.apps.googleusercontent.com`
 
 ## 帳號註冊時的ReCaptcha驗證
 註冊帳號時，需進行Google ReCaptcha驗證，證明使用者並非機器人，故註冊帳號時，也須先取得recaptcha的response後當作註冊中的其中一個參數丟給server。
