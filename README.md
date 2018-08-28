@@ -26,7 +26,9 @@ Google+相關參數為：clientId: `946399151159-2bfguo8hba3j8bt52iu8k06rlcrdf3d
 註冊帳號時，需進行Google ReCaptcha驗證，證明使用者並非機器人，故註冊帳號時，也須先取得recaptcha的response後當作註冊中的其中一個參數丟給server。
 
 iOS(使用Invisible) : data-sitekey: `6Lc3jiAUAAAAANgiTfq9s75eqCQ_52D5i3ekMyde`
+
 ReCaptcha相關參數為： data-sitekey: `6LegjyAUAAAAAPiileOTDOd6ePAqSXfBL2JtTbNa`
+
 Android(使用Android Recaptcha)：data-sitekey: `6LcelWwUAAAAALBz55ji8NQJj-tTwGoBPPW8kBJz`
 
 ## 名詞介紹
