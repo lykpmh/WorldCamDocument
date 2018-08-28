@@ -353,3 +353,15 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
         Youtube = 1     //Youtube連結
     }
     ```
+- ## <a name="PlatformTypeEnum"></a>PlatformTypeEnum (Client端平台種類)
+    ```csharp
+    /// <summary>
+    /// Client平台類別
+    /// </summary>
+    public enum PlatformTypeEnum
+    {
+        Windows = 0,
+        Android = 1,
+        IOS =2
+    }
+    ```
