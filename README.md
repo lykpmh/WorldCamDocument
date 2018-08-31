@@ -15,7 +15,7 @@ Authorization : Bearer [jwt_token]
 ## Facebook登入
 當使用Facebook登入時，需取得access_token後，把access_token於呼叫api/jwt時順便丟給server進行身分驗證。
 
-而facebook的相關參數為：appId: `509058129430940`
+而facebook的相關參數為：appId: `2116137285265889  `
 
 ## Google+登入
 與facebook相同，client端一樣需取得access_token。
