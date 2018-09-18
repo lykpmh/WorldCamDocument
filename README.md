@@ -186,18 +186,10 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
     ```csharp
     public enum AcctStatusEnum
     {
-        UnConfirm = 0,      //帳號還未確認信箱
-        Active = 1,         //帳號已經啟用信箱
-        Suspend = 2,        //帳號已被管理員Suspend
-    }
-    ```
-- ## <a name="ActiveStatusEnum"></a>ActiveStatusEnum (帳號授權碼啟用狀態)
-    ```csharp
-    public enum ActiveStatusEnum
-    {
-        UnActive = 0,       //未啟動授權碼
-        Active = 1,         //已啟動授權碼
-        Expired = 2         //授權碼已經過期
+        UnConfirm = 0,  //帳號還未確認信箱
+        Active = 1,     //帳號已經啟用信箱
+        Suspend = 2,    //帳號已被管理員Suspend
+        Expired = 3     //帳號已經過期
     }
     ```
 - ## <a name="AuthTypeEnum"></a>AuthTypeEnum (帳號登入方式)
