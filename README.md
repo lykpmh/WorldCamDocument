@@ -144,6 +144,7 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 2. lat: 經度
 3. lng: 緯度
 4. address: 地址
+
 當使用者搜尋某個地址之後，網址的lat/lng/address會自動變化。
 
 ## 使用者Profile
