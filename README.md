@@ -136,8 +136,18 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 3. 使用``[POST] api/{culture}/Image``上傳全景圖原檔，得到panoImageId。
 4. 呼叫``[POST] api/{culture}/Project/{project_id}/pano``新增場景，回傳新的Project結果。
 
+## Google Map 選擇WebView
+呼叫範例
+``[GET] https://test.worldcam360.com/editor/editgooglemap.html?lang=zh-TW&lat=6.86635829081027&lng=-75.17623924999998&address=Colombia``
+您可輸入以下參數
+1. lang: 語系 zh-TW / zh-CN / en
+2. lat: 經度
+3. lng: 緯度
+4. address: 地址
+當使用者搜尋某個地址之後，網址的lat/lng/address會自動變化。
+
 ## 使用者Profile
-點選一般資訊時，需使用 ``[GET] api/{culture}/User/{user_id} 重新抓取自己的資訊(JUser)。填入以下對應欄位：
+點選一般資訊時，需使用 ``[GET] api/{culture}/User/{user_id}`` 重新抓取自己的資訊(JUser)。填入以下對應欄位：
 1. 用戶名稱：user.NickName
 2. 用戶角色：user.RoleType
 3. 啟用序號：user.ProductCode
