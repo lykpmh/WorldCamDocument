@@ -119,12 +119,17 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 您可以呼叫 `[GET] api/{culture}/Project` API取得Project列表。或是呼叫api/{locale}/Project/{project_id}取得單一的完整Project。針對回應的JProject結構，重點是的描述畫面上欄位的對應方式。
 
 * 預覽縮圖：請存取``proj.defaultPano.PreviewImage``的縮圖屬性取得完整縮圖URL。
-* 專案狀態：請存取``proj.Status``，若為0(Closed)則關閉、1(Open)則開啟。
+* 專案狀態：請存取``proj.Status``，若為0(Closed)則關閉、1(Open)則開啟
 * 專案名稱：請存取``proj.Name``
 * 專案大小：請存取``proj.ProjectSize``，請欄位單位為byte。
 * 建立日期：請存取``proj.CreateTime``，使用UTC+0，需自行轉成Client所在時區的時間。
 * 檢視專案：請使用WebView存取以下網址。``{api_server_base_url}/editor/PanoViewer.html?projectid={projectid}&jwt_token={access_token}&jwt_expires_in={expires_in}``
 * 產生分享連結：請使用``[POST] api/{culture}/Share``產生該專案的分享連結。
+
+## PanoViewer.html  (action javascript)
+透過雙方定義好的javascript來通知app，例如:按下離開``Android 是 Mobile.action(MobileActionEnum.Exit)``。
+* Android：Mobile.action(MobileActionEnum)。
+* IOS： webkit.messageHandlers.messageHandler_action.postMessage(MobileActionEnum);。
 
 ## 建立專案
 呼叫``[POST] api/{culture}/Project`` 建立空的新專案。
@@ -366,5 +371,14 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
         Windows = 0,
         Android = 1,
         IOS =2
+    }
+    ```
+    - ## <a name="MobileActionEnum"></a>MobileActionEnum  (帳號啟用狀態)
+    ```csharp
+    public enum MobileActionEnum
+    {
+        Exit  = 0,  //離開
+        GoVR = 1,    //進入VR模式
+        ExitVR = 2,   //離開VR模式
     }
     ```
