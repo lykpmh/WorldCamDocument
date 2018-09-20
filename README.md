@@ -373,11 +373,11 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
         IOS =2
     }
     ```
-    - ## <a name="MobileActionEnum"></a>MobileActionEnum  (帳號啟用狀態)
+    - ## <a name="MobileActionEnum"></a>MobileActionEnum 
     ```csharp
     public enum MobileActionEnum
     {
-        Exit  = 0,  //離開
+        Exit  = 0,  //離開APP
         GoVR = 1,    //進入VR模式
         ExitVR = 2,   //離開VR模式
     }
