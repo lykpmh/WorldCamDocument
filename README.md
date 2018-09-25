@@ -171,6 +171,8 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
     1. 其他狀況不顯示訂閱按鈕
 1. user.RoleType = 2,9 (企業用戶/管理員) : 皆不顯示訂閱按鈕
 
+最後訂閱按鈕連到以下的webView ``{base_url}/MobilePricing?jwt_token={token}``
+
 ## 回應物件基本結構
 基本上，所有api的回應都會使用`JResponse`物件包住，`JResponse`物件包含兩個欄位，`error_codes`代表執行的結果，通常如果API執行正確，都會RETURN OK(0)，若發生驗證資料錯誤(如新增帳號時傳入的帳號格式不合法)，Server則會根據您傳入的語系`{locale}`將錯誤的訊息內容回傳到`message`欄位給client，通常只要alert告知使用者錯誤的內容為何即可。
 
