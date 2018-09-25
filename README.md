@@ -166,9 +166,9 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 使用者基本資訊的訂閱狀態，顯示訂閱按鈕的規則如下
 1. user.RoleType = 0 (一般測試用戶) : 顯示訂閱按鈕
 1. user.RoleType = 1 (付費用戶)
-  1. user.AcctStatus = Expired : 顯示訂閱按鈕
-  1. user.AcctStatus = Active && (user.ExpiredTime.CompareTo(DateTime.UTCNow.AddMonths(1)) < 0) : 顯示訂閱按鈕
-  1. 其他狀況不顯示訂閱按鈕
+    1. user.AcctStatus = Expired : 顯示訂閱按鈕
+    1. user.AcctStatus = Active && (user.ExpiredTime.CompareTo(DateTime.UTCNow.AddMonths(1)) < 0) : 顯示訂閱按鈕
+    1. 其他狀況不顯示訂閱按鈕
 1. user.RoleType = 2,9 (企業用戶/管理員) : 皆不顯示訂閱按鈕
 
 ## 回應物件基本結構
