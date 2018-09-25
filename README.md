@@ -165,11 +165,11 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 ## 顯示訂閱按鈕以及訂閱WebView
 使用者基本資訊的訂閱狀態，顯示訂閱按鈕的規則如下
 1. user.RoleType = 0 (一般測試用戶) : 顯示訂閱按鈕
-2. user.RoleType = 1 (付費用戶)
-2-1. user.AcctStatus = Expired : 顯示訂閱按鈕
-2-2. user.AcctStatus = Active && (user.ExpiredTime.CompareTo(DateTime.UTCNow.AddMonths(1)) < 0) : 顯示訂閱按鈕
-2-3. 其他狀況不顯示訂閱按鈕
-3. user.RoleType = 2,9 (企業用戶/管理員) : 皆不顯示訂閱按鈕
+1. user.RoleType = 1 (付費用戶)
+  1. user.AcctStatus = Expired : 顯示訂閱按鈕
+  1. user.AcctStatus = Active && (user.ExpiredTime.CompareTo(DateTime.UTCNow.AddMonths(1)) < 0) : 顯示訂閱按鈕
+  1. 其他狀況不顯示訂閱按鈕
+1. user.RoleType = 2,9 (企業用戶/管理員) : 皆不顯示訂閱按鈕
 
 ## 回應物件基本結構
 基本上，所有api的回應都會使用`JResponse`物件包住，`JResponse`物件包含兩個欄位，`error_codes`代表執行的結果，通常如果API執行正確，都會RETURN OK(0)，若發生驗證資料錯誤(如新增帳號時傳入的帳號格式不合法)，Server則會根據您傳入的語系`{locale}`將錯誤的訊息內容回傳到`message`欄位給client，通常只要alert告知使用者錯誤的內容為何即可。
