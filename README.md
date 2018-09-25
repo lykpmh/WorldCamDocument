@@ -398,5 +398,6 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         Exit  = 0,  //離開APP
         GoVR = 1,    //進入VR模式
         ExitVR = 2,   //離開VR模式
+        Unauthorized = 3,//401(token失效)
     }
     ```
