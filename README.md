@@ -206,6 +206,13 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 }
 ```
 
+## app編輯用的網頁
+panoeditormobile.html這個網頁是手機編輯專用的網頁。
+您可輸入以下參數(都是必須輸入)
+1. lang: 語系 zh-TW / zh-CN / en
+2. jwt_token: token
+3. projectid: 專案id
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
