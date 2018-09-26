@@ -210,7 +210,7 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 
 ## app編輯用的網頁
 panoeditormobile.html這個網頁是手機編輯專用的網頁。
-您可輸入以下參數(都是必須輸入)
+請使用WebView存取以下網址。``{api_server_base_url}/editor/panoeditormobile.html?projectid={projectid}&jwt_token={access_token}&lang={zh-TW }``
 1. lang: 語系 zh-TW / zh-CN / en
 2. jwt_token: token
 3. projectid: 專案id
@@ -399,5 +399,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         GoVR = 1,    //進入VR模式
         ExitVR = 2,   //離開VR模式
         Unauthorized = 3,//401(token失效)
+        AddPano = 4, //編輯模式按下新增全景圖
+        AddPlan = 5, //編輯模式按下新增平面圖
     }
     ```
