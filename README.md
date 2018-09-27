@@ -214,6 +214,8 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. lang: 語系 zh-TW / zh-CN / en
 2. jwt_token: token
 3. projectid: 專案id
+4. updatesceneid:用於MobileActionEnum.UpdatePano 告訴app 目前更新那個全景的id
+5. looksceneid: 指定一開始要開那個全景,用於MobileActionEnum.UpdatePano,當app選好圖上傳完圖後,返回webview,可以看到更新後的全景
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
@@ -401,5 +403,6 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         Unauthorized = 3,//401(token失效)
         AddPano = 4, //編輯模式按下新增全景圖
         AddPlan = 5, //編輯模式按下新增平面圖
+        UpdatePano =6,//編輯模式按下更新全景圖
     }
     ```
