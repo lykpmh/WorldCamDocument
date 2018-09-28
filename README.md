@@ -403,6 +403,10 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         Unauthorized = 3,//401(token失效)
         AddPano = 4, //編輯模式按下新增全景圖
         AddPlan = 5, //編輯模式按下新增平面圖
-        UpdatePano =6,//編輯模式按下更新全景圖
+        UpdatePano = 6,//編輯模式按下更新全景圖
+        AddImageToImageObject = 7,//編輯模式按下新增圖片物件
+        AddImageToDescObject = 8,/編輯模式,編輯描述物件時,按下新增圖片
+        AddImageToLogoList = 9//編輯模式,在腳架資訊時,按下新增圖片
+        AddAudioToEditProjectInfo = 10,//編輯模式,在編輯專案資訊時,按下新增背景音樂
     }
     ```
