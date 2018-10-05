@@ -409,5 +409,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         AddImageToDescObject = 8,/編輯模式,編輯描述物件時,按下新增圖片
         AddImageToLogoList = 9, //編輯模式,在腳架資訊時,按下新增圖片
         AddAudioToEditProjectInfo = 10,//編輯模式,在編輯專案資訊時,按下新增背景音樂
+        ExitAndNeedUpdateProject = 11,//編輯模式,按下離開且有更新時,app需要更新目前專案資訊記憶體和UI
+        ProjectDoesNotExist = 12,//編輯模式,因為專案不存在(當下可能被其他平台刪除),所以app收到這個訊息,要離開且更新目前專案資訊記憶體和UI
     }
     ```
