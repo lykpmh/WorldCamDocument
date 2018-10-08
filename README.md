@@ -123,7 +123,7 @@ JAcessToken的時間，以及expires_in。為了防止token過期，您可以自
 * 專案名稱：請存取``proj.Name``
 * 專案大小：請存取``proj.ProjectSize``，請欄位單位為byte。
 * 建立日期：請存取``proj.CreateTime``，使用UTC+0，需自行轉成Client所在時區的時間。
-* 檢視專案：請使用WebView存取以下網址。``{api_server_base_url}/editor/PanoViewer.html?projectid={projectid}&jwt_token={access_token}&jwt_expires_in={expires_in}``
+* 檢視專案：請使用WebView存取以下網址。``{api_server_base_url}/editor/PanoViewer.html?projectid={projectid}&jwt_token={access_token}&jwt_expires_in={expires_in}&lang={zh-TW}``
 * 產生分享連結：請使用``[POST] api/{culture}/Share``產生該專案的分享連結。
 
 ## PanoViewer.html  (action javascript)
