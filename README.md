@@ -218,6 +218,24 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 5. looksceneid: 指定一開始要看那個全景,用於MobileActionEnum.UpdatePano,當app選好圖上傳完圖後,返回webview,可以看到更新後的全景
 6. lookmapid: 指定一開始要看那個平面圖,用於MobileActionEnum.AddPlan,當app選好圖上傳完圖後,返回webview,可以直接返回編輯平面圖
 
+## 訂閱流程
+描述個人資訊頁面上的訂閱按鈕之行為。
+1. 按鈕顯示條件，只有當以下條件成立才顯示，其他狀況則不顯示。
+    1. (user.IsPeriodActive==false && (user.RoleType == RoleTypeEnum.BasicMember || user.RoleType == RoleTypeEnum.PaidMember)) 
+1. 按下訂閱按鈕流程：
+    1. 開啟WebView並連至``{api_server_base_url}/MobilePricing?jwt_token={jwt_token}``
+    1. 若付費成功，偵測目前WebView的Url是否有 ``return-agreement`` 或 ``return-payment``，代表訂閱成功，當使用者關掉WebView之後使用GET api/User API取得使用者的新資料。
+    1. 若付費失敗或使用者自行取消，會回到 ``cancel-agreement``或``cancel-payment``，代表交易取消，使用者關掉WebView之後，不須重新撈取資料
+    
+## 序號流程
+描述個人資訊頁面上的序號按鈕之行為。
+1. 按鈕顯示條件，只有以下狀況顯示
+    1. user.RoleType == RoleTypeEnum.BasicMember || user.RoleType == RoleTypeEnum.PaidMember
+1. 按下輸入序號流程
+    1. 使用修改使用者資料api 填入ProductCode之後修改即可。
+    1. 若修改成功，重新抓取使用者資料更新之
+    1. 若失敗，彈出server給的訊息即可
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
