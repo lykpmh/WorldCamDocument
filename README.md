@@ -223,7 +223,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. 按鈕顯示條件，只有當以下條件成立才顯示，其他狀況則不顯示。
     1. (user.IsPeriodActive==false && (user.RoleType == RoleTypeEnum.BasicMember || user.RoleType == RoleTypeEnum.PaidMember)) 
 1. 按下訂閱按鈕流程：
-    1. 開啟WebView並連至``{api_server_base_url}/MobilePricing?jwt_token={jwt_token}``
+    1. 開啟WebView並連至``{api_server_base_url}/{culture}/MobilePricing?jwt_token={jwt_token}``
     1. 若付費成功，偵測目前WebView的Url是否有 ``return-agreement`` 或 ``return-payment``，代表訂閱成功，當使用者關掉WebView之後使用GET api/User API取得使用者的新資料。
     1. 若付費失敗或使用者自行取消，會回到 ``cancel-agreement``或``cancel-payment``，代表交易取消，使用者關掉WebView之後，不須重新撈取資料
     
