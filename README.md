@@ -430,5 +430,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         ExitAndNeedUpdateProject = 11,//編輯模式,按下離開且有更新時,app需要更新目前專案資訊記憶體和UI
         ProjectDoesNotExist = 12,//編輯模式,因為專案不存在(當下可能被其他平台刪除),所以app收到這個訊息,要離開且更新目前專案資訊記憶體和UI
         ShareProject = 13,//檢視按下分享
+        OpenWebLink = 14,//開啟網頁連結
+        OpenVideoLink = 15,//開啟影片連結
     }
     ```
