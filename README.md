@@ -235,6 +235,18 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     1. 使用修改使用者資料api 填入ProductCode之後修改即可。
     1. 若修改成功，重新抓取使用者資料更新之
     1. 若失敗，彈出server給的訊息即可
+    
+# asteroom 2.0.0修改事項
+## 會員個人資訊，新增電話以及個人大頭照圖片
+1. 原本會員JUser資料結構新增 Phone/ProfileImage資料結構分別顯示客戶的電話以及大頭照
+1. 使用[PUT] api/{culture}/User/{user_id} API修改資料，JUserPut資料結構新增兩個欄位 phone以及profileImageId，如果塞null則代表不更新，大頭照的上傳流程與之前一樣，先使用image post 傳圖取得imageId之後塞至profileImageId。
+
+## Leadgen管理
+1. Leadgen管理提供了三個槽狀資料結構JLeadgenMain/JLeadgenProjGrop/JLeadgen 達成顯示此功能的所有資訊。 
+1. JProject資料結構新增一個欄位LeadgenMainCount，用於顯示每個專案的Leads數字。
+1. 前台Viewer客戶要填寫客人資料時，請呼叫[POST] api/{culture}/Leadgen，body填入JLeadgenPost資料結構，新增Leadgen資料
+1. 當點選專案的Leads按鈕時，呼叫 [GET] api/{culture}/LeadgenMain，查詢LeadgenMain列表，詳細查法請看swagger 此api介紹
+1. 當需要更新LeadgenMain的電話/客戶姓名/備註時，請呼叫 [PUT] api/{culture}/LeadgenMain 使用JLeadgenMainPut物件更新欄位內容
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
