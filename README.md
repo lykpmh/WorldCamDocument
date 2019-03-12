@@ -245,6 +245,14 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. 當點選專案的Leads按鈕時，呼叫 [GET] api/{culture}/LeadgenMain，查詢LeadgenMain列表，詳細查法請看swagger 此api介紹
 1. 當需要更新LeadgenMain的電話/客戶姓名/備註時，請呼叫 [PUT] api/{culture}/LeadgenMain 使用JLeadgenMainPut物件更新欄位內容
 
+## 轉移專案按鈕
+1. 轉移按鈕一律是Enabled
+1. Client端點擊此按鈕之後，檢查Client端User的條件，若角色為BasicMember或是帳號已經過期，請跳出請訂閱之類的對話方塊。
+1. 若User的AcctStatus為Active且RoleType為PaidMember/EnterpriseMember的話，才呼叫轉移專案的API
+1. 轉移專案API: [HTTPPUT] api/{culture}/Project/{project_id}/Transfer?to_account={to_account}
+1. API或執行失敗：則跳出server給的錯誤訊息
+1. API若執行成功：則重新抓取User Profile(因為UsedSize會變小)以及重新抓取專案列表(因為少一個專案)
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
