@@ -249,12 +249,13 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. 轉移按鈕一律是Enabled
 1. Client端點擊此按鈕之後，檢查Client端User的條件，若角色為BasicMember或是帳號已經過期，請跳出請訂閱之類的對話方塊。
 1. 若User的AcctStatus為Active且RoleType為PaidMember/EnterpriseMember的話，才開始轉移專案的流程
-1. 跳出一個Dialog讓使用者鍵入要轉移的目的帳號，這個Dialog同時有一個comboBox，comboBox使用取得常用帳號的api取出最近常用的帳號列表
+1. 跳出一個Dialog讓使用者鍵入要轉移的目的帳號，這個Dialog同時有一個textbox與一個comboBox，comboBox使用取得常用帳號的api取出最近常用的帳號列表
 1. 取得喜好帳號列表API：[HTTPGET] api/{culture}/User/PerferredAccount，會回傳List<JUserPerferredAccount>資料結構並顯示在combobox
 1. 使用者可透過textbox輸入帳號或由combox選擇常用帳號(擇一)輸入to_account
 1. 呼叫轉移專案API: [HTTPPUT] api/{culture}/Project/{project_id}/Transfer?to_account={to_account}
 1. API或執行失敗：則跳出server給的錯誤訊息
 1. API若執行成功：則重新抓取User Profile(因為UsedSize會變小)以及重新抓取專案列表(因為少一個專案)
+1. 以上UI還需等JASON設計
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
