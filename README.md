@@ -257,6 +257,16 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. API若執行成功：則重新抓取User Profile(因為UsedSize會變小)以及重新抓取專案列表(因為少一個專案)
 1. 以上UI還需等JASON設計
 
+# asteroom 2.2修改事項
+## 專案的GA統計報表
+1. 需要使用 [GET] api/{culture}/GAReport/{project_id} 取得報表資料(需要登入，請參見GAReport)
+1. 相關資料結構請參閱Swagger, 可以先使用https://test.asteroom.com/api/GAReport/4d21ecf4-e41e-4fe9-99e4-26698531ddc2 觀看大概產出的JSON內容。
+1. 待CLIENT端撰寫完成之後，會改回只能檢視自己的專案GA結果
+
+## 加入FCM cloud messaging功能
+1. 原本更新User基本資料的api  [PUT] api/{locale}/User/{user_id} 新增三個欄位webFCMToken / androidFCMToken / iosFCMToken，各平台登入之後取完fcm token或刷新fcm token時需要呼叫此api更新各自平台的fcm token.
+1. 各平台相關設定檔會另外再寄信通知
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
