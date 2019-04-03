@@ -267,6 +267,9 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. 原本更新User基本資料的api  [PUT] api/{locale}/User/{user_id} 新增三個欄位webFCMToken / androidFCMToken / iosFCMToken，各平台登入之後取完fcm token或刷新fcm token時需要呼叫此api更新各自平台的fcm token.
 1. 各平台相關設定檔會另外再寄信通知
 
+## Leadgen 啟閉功能
+1. 使用原本更新Project資訊的API修改 [PUT] api/{locale}/Project/{project_id} 使用IsAllowComment欄位當作此設定值 (true代表開啟, false代表關閉)
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
