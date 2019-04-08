@@ -463,5 +463,6 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         ShareProject = 13,//檢視按下分享
         OpenWebLink = 14,//開啟網頁連結
         OpenVideoLink = 15,//開啟影片連結
+        WebReday = 16,//網頁也經載好 
     }
     ```
