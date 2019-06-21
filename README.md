@@ -299,6 +299,12 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         CaptchaError = 5,                   //Captcha錯誤
         SocialAccountNeedProductCode = 6,   //使用SSN登入需要註冊碼
         AccountUnConfirm = 7,               //帳號尚未認證
+        ProjectNotExist = 8,                //專案不存在
+        UserNotExist = 9,                   //帳號不存在
+        UserExpired = 10,                   //帳號逾期
+        SyncNextround = 11,                 //代表資料與Client端預期的已經不同，請再同步一次
+        LocalServerTimeExceed = 12,         //Local端與Server端時間超過15分鐘
+        PaypalAgreementCancelWhenPending = 101, //Paypal定期定額訂單取消已通知但是目前為Pending        
         UnknownError = 9999                 //未知的錯誤
     }
     ```
