@@ -289,7 +289,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         //沒有Dollhouse
         if (project.DefaultPano != null) {
           //至少要有一個場景，才會顯示購買按鈕
-          Show "Purchase Dollhouse" Button at project's menu
+          /* Show "Purchase Dollhouse" Button at project's menu */
         }
         else {
           //不顯示任何東西
@@ -299,13 +299,13 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     else {
       if (task.Status == TaskStatus.Accepted) {
         //代表目前Dollhouse建立任務已發送給後台
-        Show "Dollhouse processing" text at project's menu
+        /* Show "Dollhouse processing" text at project's menu */
       }
       else if (task.Status == TaskStatus.Feedback) {
-        Show "Feedback processing" text at project's menu       
+        /* Show "Feedback processing" text at project's menu */
       }
       else if (task.Status == TaskStatus.Completed) {
-        Show "Dollhouse Feedback" Button at project's menu
+        /* Show "Dollhouse Feedback" Button at project's menu */
       }
     }
     ```
