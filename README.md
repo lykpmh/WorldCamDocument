@@ -309,6 +309,19 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
       }
     }
     ```
+1. Purchase Dollhouse按鈕行為
+    1. 呼叫[POST] /api/{locale}/Order with body
+    ``` json
+    {
+      "pricing_item_id" : "P_DOLLHOUSE",
+      "project_id": "{project_id}"
+    }
+    ```
+    1. 會回傳JResponse<string>結構，如果失敗則顯示訊息，成功的話data回傳一串URL，此時將網頁導向這個url進入購買流程
+1. Dollhouse Feedback按鈕行為
+    1. 按下之後會顯示一個表單，會詢問使用者是否滿意建出來的Dollhouse，如果滿意，按下結案按鈕，將Dollhouse任務進行結案的動作。
+    1. 如果選擇有意見要回饋，填寫意見之後按下送出，則會把訊息告知後台人員，並且狀態變成回饋處理中的狀態。此時選單會顯示Feedback processing文字
+    
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
