@@ -270,7 +270,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 # asteroom 2.4修改事項
 ## Dollhouse購買流程
 1. 專案資料結構，第一個增加project.dollTasks列表，代表這個project目前的建立Dollhouse任務的清單
-1. 第二個增加dollFloors資料結構，代表這個project目前有的Dollhouse (如果dollFloors.Count>1代表有Dollhouse)
+1. 第二個dollFloors資料結構，代表這個project目前有的Dollhouse (如果dollFloors.Count>1代表有Dollhouse)
 1. 專案列表中的選單，使用下列判斷式顯示對應的選單
     ```csharp
     JDollTask activeTask = null;
@@ -281,47 +281,52 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
       }    
     }
     if (activeTask == null) {
-      //代表目前這個Project尚未建立任何作用中的任務單
+      //代表目前這個Project目前沒有任何整再跑流程的任務
       if (project.DollFloors.Count > 0) {
-        //有Dollhouse，不顯示任何東西
+        //有Dollhouse，不顯示任何按鈕
       }
       else {
         //沒有Dollhouse
         if (project.DefaultPano != null) {
-          //至少要有一個場景，才會顯示購買按鈕
-          /* Show "Purchase Dollhouse" Button at project's menu */
+          //代表有一個以上場景，顯示Dollhouse按鈕
         }
         else {
-          //不顯示任何東西
+          //代表目前連一個場景都沒有，不顯示任何按鈕
         }
       }
     }
     else {
-      if (task.Status == TaskStatus.Accepted) {
-        //代表目前Dollhouse建立任務已發送給後台
-        /* Show "Dollhouse processing" text at project's menu */
-      }
-      else if (task.Status == TaskStatus.Feedback) {
-        /* Show "Feedback processing" text at project's menu */
-      }
-      else if (task.Status == TaskStatus.Completed) {
-        /* Show "Dollhouse Feedback" Button at project's menu */
+      if (task.Status == TaskStatus.Accepted ||
+          task.Status == TaskStatus.Feedback ||
+          task.Status == TaskStatus.Completed) {
+          //顯示Dollhouse按鈕
       }
     }
     ```
-1. Purchase Dollhouse按鈕行為
-    1. 呼叫[POST] /api/{locale}/Order with body
-    ``` json
-    {
-      "pricing_item_id" : "P_DOLLHOUSE",
-      "project_id": "{project_id}"
-    }
-    ```
+1. Dollhouse按鈕行為
+  1. 使用上一節的方式找activeTask
+  1. 當project.DollFloors.Count == 0且project的activeTask == null
+    1. 顯示第一次購買Doorhouse視窗，上面有個購買按鈕
+    1. 呼叫[POST] /api/{locale}/Order with body ```{"pricing_item_id" : "P_DOLLHOUSE", "project_id": "{project_id}"}```    
     1. 會回傳JResponse<string>結構，如果失敗則顯示訊息，成功的話data回傳一串URL，此時將網頁導向這個url進入購買流程
-1. Dollhouse Feedback按鈕行為
-    1. 按下之後會顯示一個表單，會詢問使用者是否滿意建出來的Dollhouse，如果滿意，按下結案按鈕，將Dollhouse任務進行結案的動作。
-    1. 如果選擇有意見要回饋，填寫意見之後按下送出，則會把訊息告知後台人員，並且狀態變成回饋處理中的狀態。此時選單會顯示Feedback processing文字
-    1. 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+  1. 當project.DollFloors.Count == 0 且 activeTask.Status != null
+    1. 如果activeTask.Status == TaskStatus.Accepted
+      1. 顯示任務處理中視窗
+    1. 如果activeTask.Status == TaskStatus.Feedback
+      1. 顯示任務處理中視窗 (強調是處理Feedback案件)
+    1. 如果activeTask.Status == TaskStatus.Completed
+      1. 顯示結案及Feedback視窗
+        1. 選結案 : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+        1. 填入字串後選Feedback : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+  1. 當project.DollFloors.Count > 0 且 activeTask == null
+    1. 不顯示Dollhouse按鈕
+  1. 當project.DollFloors.Count > 0 且 activeTask != null
+    1. 如果activeTask.Status == TaskStatus.Feedback
+      1. 顯示處理中視窗
+    1. 如果activeTask.Status == TaskStatus.Completed
+      1. 顯示結案及Feedback視窗
+        1. 選結案 : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+        1. 填入字串後選Feedback : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
