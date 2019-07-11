@@ -267,10 +267,16 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. 原本更新User基本資料的api  [PUT] api/{locale}/User/{user_id} 新增三個欄位webFCMToken / androidFCMToken / iosFCMToken，各平台登入之後取完fcm token或刷新fcm token時需要呼叫此api更新各自平台的fcm token.
 1. 各平台相關設定檔會另外再寄信通知
 
-# asteroom 2.4修改事項
+# asteroom 2.5修改事項
+1. 原企業版改為收取120美金一個月，擁有10G的空間以及Agent管理功能
+1. 會員的角色新增一級：客製版(RoleType=7)
+  1. 客製版會員可由後台調整  
+  1. App的購買按鈕當為客製版時不顯示
+  
+# asteroom 2.6修改事項
 ## Dollhouse購買流程
-1. 專案資料結構，第一個增加project.dollTasks列表，代表這個project目前的建立Dollhouse任務的清單
-1. 第二個dollFloors資料結構，代表這個project目前有的Dollhouse (如果dollFloors.Count>1代表有Dollhouse)
+1. 專案列表API所回傳的資料結構，增加dollTasks陣列，代表這個project目前的建立Dollhouse任務的清單
+1. 第二個dollFloors資料結構，代表這個project目前有的Dollhouse (如果dollFloors.Count>0代表有Dollhouse)
 1. 專案列表中的選單，使用下列判斷式顯示對應的選單
     ```csharp
     JDollTask activeTask = null;
@@ -296,9 +302,9 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
       }
     }
     else {
-      if (task.Status == TaskStatus.Accepted ||
-          task.Status == TaskStatus.Feedback ||
-          task.Status == TaskStatus.Completed) {
+      if (activeTask.Status == TaskStatus.Accepted ||
+          activeTask.Status == TaskStatus.Feedback ||
+          activeTask.Status == TaskStatus.Completed) {
           //顯示Dollhouse按鈕
       }
     }
