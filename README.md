@@ -310,29 +310,29 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     }
     ```
 1. Dollhouse按鈕行為
-  1. 使用上一節的方式找activeTask
-  1. 當project.DollFloors.Count == 0且project的activeTask == null
-    1. 顯示第一次購買Doorhouse視窗，上面有個購買按鈕
-    1. 呼叫[POST] /api/{locale}/Order with body ```{"pricing_item_id" : "P_DOLLHOUSE", "project_id": "{project_id}"}```    
-    1. 會回傳JResponse<string>結構，如果失敗則顯示訊息，成功的話data回傳一串URL，此時將網頁導向這個url進入購買流程
-  1. 當project.DollFloors.Count == 0 且 activeTask.Status != null
-    1. 如果activeTask.Status == TaskStatus.Accepted
-      1. 顯示任務處理中視窗
-    1. 如果activeTask.Status == TaskStatus.Feedback
-      1. 顯示任務處理中視窗 (強調是處理Feedback案件)
-    1. 如果activeTask.Status == TaskStatus.Completed
-      1. 顯示結案及Feedback視窗
-        1. 選結案 : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
-        1. 填入字串後選Feedback : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
-  1. 當project.DollFloors.Count > 0 且 activeTask == null
-    1. 不顯示Dollhouse按鈕
-  1. 當project.DollFloors.Count > 0 且 activeTask != null
-    1. 如果activeTask.Status == TaskStatus.Feedback
-      1. 顯示處理中視窗
-    1. 如果activeTask.Status == TaskStatus.Completed
-      1. 顯示結案及Feedback視窗
-        1. 選結案 : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
-        1. 填入字串後選Feedback : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+    * 使用上一節的方式找activeTask
+    * 當project.DollFloors.Count == 0且project的activeTask == null
+        * 顯示第一次購買Doorhouse視窗，上面有個購買按鈕
+        * 呼叫[POST] /api/{locale}/Order with body ```{"pricing_item_id" : "P_DOLLHOUSE", "project_id": "{project_id}"}```    
+        * 會回傳JResponse<string>結構，如果失敗則顯示訊息，成功的話data回傳一串URL，此時將網頁導向這個url進入購買流程
+    * 當project.DollFloors.Count == 0 且 activeTask.Status != null
+        * 如果activeTask.Status == TaskStatus.Accepted
+            * 顯示任務處理中視窗
+        * 如果activeTask.Status == TaskStatus.Feedback
+            * 顯示任務處理中視窗 (強調是處理Feedback案件)
+        * 如果activeTask.Status == TaskStatus.Completed
+            * 顯示結案及Feedback視窗
+                * 選結案 : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+                * 填入字串後選Feedback : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+    * 當project.DollFloors.Count > 0 且 activeTask == null
+        * 不顯示Dollhouse按鈕
+    * 當project.DollFloors.Count > 0 且 activeTask != null
+        * 如果activeTask.Status == TaskStatus.Feedback
+            * 顯示處理中視窗
+        * 如果activeTask.Status == TaskStatus.Completed
+            * 顯示結案及Feedback視窗
+                * 選結案 : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+                * 填入字串後選Feedback : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
