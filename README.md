@@ -277,38 +277,43 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 ## Dollhouse購買流程
 1. 專案列表API所回傳的資料結構，增加dollTasks陣列，代表這個project目前的建立Dollhouse任務的清單
 1. 第二個dollFloors資料結構，代表這個project目前有的Dollhouse (如果dollFloors.Count>0代表有Dollhouse)
-1. 專案列表中的選單，使用下列判斷式顯示對應的選單
+1. 撰寫findActiveTask(Project proj)
     ```csharp
-    JDollTask activeTask = null;
-    foreach (var task in project.dollTasks) {
-      if (task.Status != TaskStatus.Closed) {
-        activeTask = task;
-        break;
-      }    
-    }
-    if (activeTask == null) {
-      //代表目前這個Project目前沒有任何整再跑流程的任務
-      if (project.DollFloors.Count > 0) {
-        //有Dollhouse，不顯示任何按鈕
-      }
-      else {
-        //沒有Dollhouse
-        if (project.DefaultPano != null) {
-          //代表有一個以上場景，顯示Dollhouse按鈕
+    public DollTask findActiveTask(Project proj) {
+        foreach (var task in proj.dollTasks) {
+            if (task.Status == TaskStatus.Acceppted ||
+                task.Status == TaskStatus.Completed ||
+                task.Status == TaskStatus.Feedback) {
+                return task;
+            }
         }
-        else {
-          //代表目前連一個場景都沒有，不顯示任何按鈕
-        }
-      }
-    }
-    else {
-      if (activeTask.Status == TaskStatus.Accepted ||
-          activeTask.Status == TaskStatus.Feedback ||
-          activeTask.Status == TaskStatus.Completed) {
-          //顯示Dollhouse按鈕
-      }
+        return null;
     }
     ```
+1. 專案列表中，每個專案圖片右上角，使用以下邏輯顯示小ICON
+   ```csharp
+   var activeTask = findActiveTask(project);
+   if (activeTask != null) {
+       if (dollTask.DollFloors.Count > 0) {
+           //顯示Dollhouse建置中圖示
+           //顯示Dollhouse按鈕
+       }
+       else {
+           //顯示Dollhouse建置中圖示
+           //顯示Dollhouse按鈕
+       }
+   }
+   else {
+       if (dollTask.DollFloors.Count > 0) {
+           //顯示Dollhouse已完成圖示
+           //選單不顯示任何按鈕
+       }
+       else {
+           //不顯示任何圖示
+           //選單顯示Dollhouse按鈕
+       }
+   }
+   ```
 1. Dollhouse按鈕行為
     * 使用上一節的方式找activeTask
     * 當project.DollFloors.Count == 0且project的activeTask == null
