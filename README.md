@@ -545,5 +545,6 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         OpenWebLink = 14,//開啟網頁連結
         OpenVideoLink = 15,//開啟影片連結
         WebReday = 16,//網頁也經載好 
+        BuyDollhouse = 17,//顯示購買dollhouse視窗
     }
     ```
