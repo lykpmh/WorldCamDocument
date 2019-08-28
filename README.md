@@ -273,7 +273,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
   1. 客製版會員可由後台調整  
   1. App的購買按鈕當為客製版時不顯示
   
-# asteroom 2.6修改事項
+# asteroom 2.5修改事項
 ## Dollhouse購買流程
 1. 專案列表API所回傳的資料結構，增加dollTasks陣列，代表這個project目前的建立Dollhouse任務的清單
 1. 第二個dollFloors資料結構，代表這個project目前有的Dollhouse (如果dollFloors.Count>0代表有Dollhouse)
@@ -338,6 +338,9 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
             * 顯示結案及Feedback視窗
                 * 選結案 : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
                 * 填入字串後選Feedback : 使用 ```[PUT] api/DollTask/{id}``` api更新狀態
+
+# asteroom 2.6修改 事項
+1. 原本的api/DollTask/{project_id} 取回的資料結構中，新增一個int類型的欄位panoCount，目的是顯示目前有幾張全景圖。
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
